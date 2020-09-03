@@ -13,7 +13,7 @@ void compile(std::string data) {
             if(data[i] == '[') loops++;
             if(data[i] == ']') {
                 // if there are no loops happening
-                if(tape[ptr] == 0) isLoop = false;
+                if(loops == 0) isLoop = false;
                 else loops--;
             }
         }
