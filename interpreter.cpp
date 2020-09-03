@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <string>
 
 void compile(std::string data) {
     int tape[30000] = {0};
@@ -46,8 +47,22 @@ void compile(std::string data) {
     // std::cout << "\n";
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+    std::ifstream file(argv[1]);
     std::string code;
-    std::cin >> code;
+    if(!file.is_open()) {
+        std::cout << "File " << argv[1] << " failed to open\n";
+        return 0;
+    }
+    std::string line;
+    std::vector<std::string> lines = std::vector<std::string>();
+    while(getline(file, line)) {
+        lines.push_back(line);
+    }
+    for(std::string line : lines) {
+        for(char letter : line) {
+            code.push_back(letter);
+        }
+    }
     compile(code);
 }
